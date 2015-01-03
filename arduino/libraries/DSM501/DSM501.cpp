@@ -90,11 +90,9 @@ float DSM501::getLowRatio(int i) {
 float DSM501::getParticalWeight(int i) {
 	/*
 	 * with data sheet...regression function is
-	 * 	y=0.30473*x^3-2.63943*x^2+102.60291*x-3.49616
 	 *    y=0.1776*x^3-2.24*x^2+ 94.003*x
 	 */
 	float r = getLowRatio(i);
-	//float weight = 0.30473 * pow(r, 3) - 2.63943 * pow(r, 2) + 102.60291 * r - 3.49616;
 	float weight = 0.1776*pow(r,3) - 0.24*pow(r,2) + 94.003*r;
 	return weight  < 0.0 ? 0.0 : weight;
 }
@@ -110,25 +108,25 @@ uint32_t DSM501::getAQI() {
 
 	float P25Weight = getPM25();
 	  if (P25Weight>= 0 && P25Weight <= 35) {
-	    aqi = 0   +(int)(50.0 / 35 * P25Weight);
+	    aqi = 0   + (50.0 / 35 * P25Weight);
 	  } 
 	  else if (P25Weight > 35 && P25Weight <= 75) {
-	    aqi = 50  + (int)(50.0 / 40 * (P25Weight - 35));
+	    aqi = 50  + (50.0 / 40 * (P25Weight - 35));
 	  } 
 	  else if (P25Weight > 75 && P25Weight <= 115) {
-	    aqi = 100 + (int)(50.0 / 40 * (P25Weight - 75));
+	    aqi = 100 + (50.0 / 40 * (P25Weight - 75));
 	  } 
 	  else if (P25Weight > 115 && P25Weight <= 150) {
-	    aqi = 150 + (int)(50.0 / 35 * (P25Weight - 115));
+	    aqi = 150 + (50.0 / 35 * (P25Weight - 115));
 	  } 
 	  else if (P25Weight > 150 && P25Weight <= 250) {
-	    aqi = 200 + (int)(100.0 / 100.0 * (P25Weight - 150));
+	    aqi = 200 + (100.0 / 100.0 * (P25Weight - 150));
 	  } 
 	  else if (P25Weight > 250 && P25Weight <= 500) {
-	    aqi = 300 + (int)(200.0 / 250.0 * (P25Weight - 250));
+	    aqi = 300 + (200.0 / 250.0 * (P25Weight - 250));
 	  } 
 	  else if (P25Weight > 500.0) {
-	    aqi = 500 + (int)(500.0 / 500.0 * (P25Weight - 500.0)); // Extension
+	    aqi = 500 + (500.0 / 500.0 * (P25Weight - 500.0)); // Extension
 	  } 
 	  else {
 	    aqi = 0; // Initializing

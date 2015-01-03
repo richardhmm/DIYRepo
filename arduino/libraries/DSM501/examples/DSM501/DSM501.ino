@@ -33,7 +33,7 @@ void setup()
   Serial.begin(9600);	//for output information
 
   // Initialize DSM501
-  dsm501.begin();
+  dsm501.begin(MIN_WIN_SPAN);
 
   // wait 60s for DSM501 to warm up
   for (int i = 1; i <= 60; i++)

@@ -54,13 +54,13 @@ public:
 	float getLowRatio(int i = 0);
 	float getParticalWeight(int i = 0);
 	float getPM25();
-	uint32_t 	getAQI();
+	uint32_t getAQI();
 
 private:
-	int 	_pin[2];
+	int _pin[2];
 	uint32_t _low_total[2];
-	uint32_t	_win_total[2];
-	uint32_t	_span;
+	uint32_t _win_total[2];
+	uint32_t _span;
 	uint8_t _done[2];
 	float _lastLowRatio[2];
 };
