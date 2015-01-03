@@ -46,7 +46,7 @@ yl_sensor pm25(29511, &ardu); //  yeelink sensor id  DSM501A
 
 //replace first param value with ur u-apikey
 yl_w5100_client client;
-yl_messenger messenger(&client, "xxx", "api.yeelink.net");   // API KEY
+yl_messenger messenger(&client, "xxxxx", "api.yeelink.net");   // API KEY
 #endif
 
 DSM501 dsm501(DSM501_PM10, DSM501_PM25);
@@ -72,10 +72,10 @@ void setup()
 
 void loop()
 {
-//  int v = analogRead(THERM_PIN);
+  int v = analogRead(THERM_PIN);
 #if w5100
-//  yl_value_data_point dp1(lm35_convertor(v));
-//  therm.single_post(messenger, dp1);
+  yl_value_data_point dp1(lm35_convertor(v));
+  therm.single_post(messenger, dp1);
 #endif
 //  Serial.println(lm35_convertor(v));
 
@@ -88,7 +88,7 @@ void loop()
   yl_value_data_point dp6(pm);
   pm25.single_post(messenger, dp6);
 #endif
-  Serial.println(pm);
+//  Serial.println(pm);
 }
 
 
