@@ -77,7 +77,7 @@ float DSM501::getLowRatio(int i) {
 	if (_done[i] == 1)
 	{
 	    _lastLowRatio[i] = (_low_total[i] * 100.0) / _win_total[i];
-	    _win_total[i] = 0;
+	    _low_total[i] = 0;
 	    _win_total[i] = 0;
 	    _done[i] = 0;
 	    return _lastLowRatio[i];

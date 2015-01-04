@@ -21,6 +21,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+/**
+   connect the sensor as follows :
+          Pin 2 of dust sensor PM1.0      -> Digital 3
+	  Pin 3 of dust sensor          -> +5V 
+	  Pin 4 of dust sensor PM2.5    -> Digital 4
+	  Pin 5 of dust sensor          -> Ground
+  Datasheet: http://www.samyoungsnc.com/products/3-1%20Specification%20DSM501.pdf
+*/
 #include<DSM501.h>
 
 #define DSM501_PM10 3
@@ -48,10 +56,13 @@ void loop()
 {
   // call dsm501 to handle updates.
   dsm501.update();
+  
+  // get PM density of particles over 1.0 μm
   Serial.print("PM10: ");
   Serial.print(dsm501.getParticalWeight(0));
   Serial.println(" ug/m3");
   
+  // get PM density of particles over 2.5 μm
   Serial.print("PM25: ");
   Serial.print(dsm501.getParticalWeight(1));
   Serial.println(" ug/m3");
@@ -59,6 +70,7 @@ void loop()
   Serial.print("AQI: ");
   Serial.println(dsm501.getAQI());
   
+  // get PM2.5 density of particles between 1.0~2.5 μm
   Serial.print("PM2.5: ");
   Serial.print(dsm501.getPM25());
   Serial.println(" ug/m3");

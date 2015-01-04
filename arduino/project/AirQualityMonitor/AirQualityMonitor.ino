@@ -21,6 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+/**
+   use Arduino Leonardo
+   
+   connect DSM501A as follows :
+          Pin 2 of dust sensor PM1.0    -> Digital 3
+	  Pin 3 of dust sensor          -> +5V 
+	  Pin 4 of dust sensor PM2.5    -> Digital 4
+	  Pin 5 of dust sensor          -> Ground
+  Datasheet: http://www.samyoungsnc.com/products/3-1%20Specification%20DSM501.pdf
+   
+ connect LM35 as follows :
+	  VCC          -> +5V 
+	  Vout         -> Analog 5
+	  GND          -> Ground
+*/
 #define W5100 1
 #if W5100
 #include <Ethernet.h>
@@ -46,7 +61,7 @@ yl_sensor pm25(29511, &ardu); //  yeelink sensor id  DSM501A
 
 //replace first param value with ur u-apikey
 yl_w5100_client client;
-yl_messenger messenger(&client, "xxxxx", "api.yeelink.net");   // API KEY
+yl_messenger messenger(&client, "xxx", "api.yeelink.net");   // API KEY
 #endif
 
 DSM501 dsm501(DSM501_PM10, DSM501_PM25);
@@ -73,7 +88,7 @@ void setup()
 void loop()
 {
   int v = analogRead(THERM_PIN);
-#if w5100
+#if W5100
   yl_value_data_point dp1(lm35_convertor(v));
   therm.single_post(messenger, dp1);
 #endif
